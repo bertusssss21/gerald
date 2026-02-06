@@ -1,142 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yes or yes</title>
-    <style>
-        body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>yes or yes</title>
 
-    .container {
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
 
-    h1 {
-      color: #fff;
-      margin-bottom: 30px;
-    }
+.container {
+  text-align: center;
+  position: relative;
+}
 
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.2s;
-    }
+h1 {
+  color: white;
+  margin-bottom: 30px;
+}
 
-    #yes {
-      background: #ff4d6d;
-      color: white;
-    }
+.buttons {
+  position: relative;
+  height: 80px;
+}
 
-    #no {
-      background: white;
-      color: #ff4d6d;
-      position: absolute;
-    }
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 10px;
+}
 
-    .message {
-      display: none;
-      color: white;
-      font-size: 32px;
-      animation: pop 0.5s ease;
-    }
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
 
-    @keyframes pop {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
+#no {
+  background: white;
+  color: #ff4d6d;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
 
-    .heart {
-      position: absolute;
-      color: red;
-      font-size: 24px;
-      animation: float 3s linear forwards;
-    }
+.message {
+  display: none;
+  color: white;
+  font-size: 32px;
+  animation: pop 0.5s ease;
+}
 
-    @keyframes float {
-      from {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-200px);
-        opacity: 0;
-      }
-    }
+@keyframes pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: float 3s linear forwards;
+}
 
-
-
-
-
-
-    </style>
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-200px); opacity: 0; }
+}
+</style>
 </head>
+
 <body>
-    <center>
-    <div class="container">
-        <h1>do you love me?</h1>
-        <button id="yes">Yes</button>
-        <button id="no">No</button>
+
+<div class="container">
+  <h1>Do you love me?</h1>
+
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+
+  <div id="message" class="message">Yayyy ❤️</div>
 </div>
-    
-    <script>
-        const noBtn = document.getElementById("no")
-        const yesBtn = document.getElementById("yes")
-        const msg = document.getElementById("message")
 
-        noBtn.addEventListener("mouseenter", moveButton)
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const msg = document.getElementById("message");
 
-        function moveButton(){
-            const x = Math.random() * (window.innerWidth - 100)
-            const y = Math.random() * (window.innerHeight - 50)
-            noBtn.style.left = x + "px"
-            noBtn.style.top = y + "px"
-        }
+noBtn.addEventListener("mouseenter", moveButton);
 
-        yesBtn.addEventListener("click", () =>{
-            yesBtn.style.display = "none"
-            noBtn.style.display = "none"
-            msg.style.display = "block"
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
 
-            setInterval(createHeart ,350)
-        })
+yesBtn.addEventListener("click", () => {
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+  msg.style.display = "block";
 
-        function createHeart(){
-            const heart = document.createElement("div")
-            heart.className = "heart"
-            heart.innerHTML = "❤️"
-            heart.style.left = Math.random() * window.innerwidth + "px"
-            heart.style.top = Math.random() * window.innerHeight + "px"
-            document.body.appendChild(heart)
+  setInterval(createHeart, 350);
+});
 
-            setTimeout(() =>{
-                heart.remove()
-            }, 3000)
-        }
-        
-        yesBtn.addEventListener("click",() =>{
-            window.location.href = "hi.html"
-        })
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.top = Math.random() * window.innerHeight + "px";
+  document.body.appendChild(heart);
 
-        
+  setTimeout(() => heart.remove(), 3000);
+}
+</script>
 
-
-
-    </script>
-    </center>
-    
 </body>
 </html>
