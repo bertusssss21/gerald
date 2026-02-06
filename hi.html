@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tell Me About Me ❤️</title>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffe6eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin-top: 10px;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: pink;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #reply {
+      margin-top: 15px;
+      color: green;
+      display: none;
+    }
+  </style>
+
+  
+</head>
+<body>
+<center>
+  <div>
+    <h1>hi tell what you feel about me</h1>
+  <p>i made this just for you</p>
+
+  <textarea name="txt" id="txtbox" placeholder="Write here..."></textarea>
+  <br>
+  <button onclick="submitTest()">send here</button>
+
+  <p id="reply">Thanks for being honest</p>
+  </div>
+
+
+
+
+
+  <script>
+    function submitTest() {
+    const text = document.getElementById("txtbox").value;
+    if (text.trim() === "") return;
+
+    localStorage.setItem("herMessage", text);
+    document.getElementById("reply").style.display = "block";
+    document.getElementById("txtbox").value = "";
+    
+     window.location.href ="indexx.html"
+  }
+
+ 
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "XXXX",
+    appId: "XXXX"
+  };
+
+  
+
+  const sendBtn = document.getElementById("sendBtn");
+  const messageBox = document.getElementById("message");
+
+  console.log("JS loaded"); // IMPORTANT
+
+  sendBtn.addEventListener("click", async () => {
+    console.log("Send clicked");
+
+    const text = messageBox.value;
+    if (text.trim() === "") return;
+
+    await addDoc(collection(db, "messages"), {
+      text: text,
+      time: new Date()
+    });
+
+    document.getElementById("reply").style.display = "block";
+    messageBox.value = "";
+  });
+
+  
+  </script>
+</center>
+
+</body>
+</html>
+>

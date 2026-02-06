@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yeayyy!</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffddc1, #ffb6b6);
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    .box {
+      background: white;
+      padding: 50px 80px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      text-align: center;
+      z-index: 1; /* on top of stickers */
+    }
+
+    .box h1 {
+      color: #ff4d6d;
+      font-size: 60px;
+      margin: 0;
+    }
+
+    .sticker {
+      position: absolute;
+      font-size: 24px;
+      pointer-events: none;
+      animation: float 3s linear forwards;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-200px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>Yeayyy 🎉</h1>
+  </div>
+
+  <script>
+    const emojis = ["❤️", "💖", "🌟", "✨", "💌", "😍"];
+
+    function createSticker() {
+      const sticker = document.createElement("div");
+      sticker.className = "sticker";
+      sticker.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      sticker.style.left = Math.random() * window.innerWidth + "px";
+      sticker.style.top = window.innerHeight + "px";
+      sticker.style.fontSize = Math.random() * 30 + 20 + "px";
+
+      document.body.appendChild(sticker);
+
+      // Animate upwards
+      let pos = window.innerHeight;
+      const speed = Math.random() * 2 + 1;
+
+      const interval = setInterval(() => {
+        pos -= speed;
+        sticker.style.top = pos + "px";
+        if(pos < -50){
+          sticker.remove();
+          clearInterval(interval);
+        }
+      }, 20);
+    }
+
+    // Create stickers continuously
+    setInterval(createSticker, 200);
+  </script>
+
+</body>
+</html>
+
